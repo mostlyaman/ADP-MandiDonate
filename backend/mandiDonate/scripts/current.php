@@ -1,5 +1,6 @@
 <?php
     include("config.php");
+    include("access.php");
     session_start();
     if(!array_key_exists('login_user', $_SESSION)) $_SESSION['login_user'] = '';
     if(!array_key_exists('role', $_SESSION)) $_SESSION['role'] = '';

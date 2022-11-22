@@ -1,5 +1,6 @@
 <?php
     include("config.php");
+    include("access.php")
     session_start();
     $_POST = json_decode(file_get_contents('php://input'), true);
 
@@ -13,6 +14,7 @@
         
         // If result matched $myusername and $mypassword, table row must be 1 row
         if($count == 0) {
+            $role = "User";
             $personname = mysqli_real_escape_string($db,$_POST['personname']);
             $emailid = mysqli_real_escape_string($db,$_POST['emailid']);
             $mypassword = mysqli_real_escape_string($db,$_POST['password']); 
@@ -33,6 +35,7 @@
                 $result = mysqli_query($db,$sql);
 
                 $_SESSION['login_user'] = $myusername;
+                $_SESSION['role'] = $role;
                 $jsonres = array(
                     "error" => 0,
                     "message" => "User Registered Successfully."
@@ -40,6 +43,7 @@
             }
         }else {
             $_SESSION['login_user'] = '';
+            $_SESSION['role'] = null;
             $jsonres = array(
                 "error" => 1,
                 "message" => "Username Already Registered."
