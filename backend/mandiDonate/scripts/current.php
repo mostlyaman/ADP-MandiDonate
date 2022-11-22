@@ -1,6 +1,7 @@
 <?php
     include("config.php");
     session_start();
+    if(!array_key_exists('login_user', $_SESSION)) $_SESSION['login_user'] = '';
     $myusername = $_SESSION['login_user'];
     if($myusername) {
         $sql = "SELECT personname FROM donatordetails WHERE username = '$myusername'";
